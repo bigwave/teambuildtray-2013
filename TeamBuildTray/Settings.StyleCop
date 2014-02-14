@@ -1,0 +1,6 @@
+<StyleCopSettings Version="105">
+  <GlobalSettings>
+    <StringProperty Name="MergeSettingsFiles">Linked</StringProperty>
+    <StringProperty Name="LinkedSettingsFile">C:\Dev\Current\Tools\MSBuild (x86)\Microsoft\StyleCop\v4.7\Settings.StyleCop</StringProperty>
+  </GlobalSettings>
+</StyleCopSettings>

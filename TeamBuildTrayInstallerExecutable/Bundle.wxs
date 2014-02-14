@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Bundle Name="TeamBuildTrayInstallerExecutable" Version="1.0.0.0" Manufacturer="Bigwave" UpgradeCode="bd48d4a1-91ba-4443-9956-a4c221e72649">
+		<BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense" />
+
+		<Chain>
+			<!-- TODO: Define the list of chained packages. -->
+			<MsiPackage SourceFile="$(var.TeamBuildTrayInstaller.TargetPath)" /> 
+		</Chain>
+	</Bundle>
+</Wix>
