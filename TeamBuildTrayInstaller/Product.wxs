@@ -27,9 +27,36 @@
 	<Fragment>
 		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
 			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
-			<Component Id="ProductComponent"> 
-      <File Source="$(var.TeamBuildTray.TargetPath)" />
-       </Component> 
+			<Component Id="TargetPath">
+        <File Source="$(var.TeamBuildTray.TargetPath)" />
+      </Component>
+      <Component Id="Amber.ico">
+        <File Source="$(var.TeamBuildTray.TargetDir)/Amber.ico" />
+      </Component>
+      <Component Id="Green.ico">
+        <File Source="$(var.TeamBuildTray.TargetDir)/Green.ico" />
+      </Component>
+      <Component Id="Grey.ico">
+        <File Source="$(var.TeamBuildTray.TargetDir)/Grey.ico" />
+      </Component>
+      <Component Id="Microsoft.TeamFoundation.WorkItemTracking.Client.DataStoreLoader.dll">
+        <File Source="$(var.TeamBuildTray.TargetDir)/Microsoft.TeamFoundation.WorkItemTracking.Client.DataStoreLoader.dll" />
+      </Component>
+      <Component Id="Microsoft.WITDataStore.dll">
+        <File Source="$(var.TeamBuildTray.TargetDir)/Microsoft.WITDataStore.dll" />
+      </Component>
+      <Component Id="Red.ico">
+        <File Source="$(var.TeamBuildTray.TargetDir)/Red.ico" />
+      </Component>
+      <Component Id="System.Net.Http.Formatting.dll">
+        <File Source="$(var.TeamBuildTray.TargetDir)/System.Net.Http.Formatting.dll" />
+      </Component>
+      <Component Id="System.Web.Http.dll">
+        <File Source="$(var.TeamBuildTray.TargetDir)/System.Web.Http.dll" />
+      </Component>
+      <Component Id="TeamBuildTray.exe.config">
+        <File Source="$(var.TeamBuildTray.TargetDir)/TeamBuildTray.exe.config"/>
+      </Component> 
 		</ComponentGroup>
 	</Fragment>
 </Wix>

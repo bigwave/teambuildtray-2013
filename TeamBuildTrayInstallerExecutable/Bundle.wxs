@@ -5,7 +5,7 @@
 
 		<Chain>
 			<!-- TODO: Define the list of chained packages. -->
-			<MsiPackage SourceFile="$(var.TeamBuildTrayInstaller.TargetPath)" /> 
-		</Chain>
+      <MsiPackage SourceFile="$(var.TeamBuildTrayInstaller.TargetPath)" />
+    </Chain>
 	</Bundle>
 </Wix>
