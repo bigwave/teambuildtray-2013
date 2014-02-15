@@ -21,6 +21,9 @@
 			<Directory Id="ProgramFilesFolder">
 				<Directory Id="INSTALLFOLDER" Name="TeamBuildTrayInstaller" />
 			</Directory>
+  <Directory Id="ProgramMenuFolder" Name="PMenu">
+        <Directory Id="ProgramMenuDir" Name="TeamBuildTray" />
+      </Directory>
 		</Directory>
 	</Fragment>
 
@@ -28,7 +31,20 @@
 		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
 			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
 			<Component Id="TargetPath">
-        <File Source="$(var.TeamBuildTray.TargetPath)" />
+        <File Source="$(var.TeamBuildTray.TargetPath)" KeyPath="yes">
+          <Shortcut Id="startmenuAdv"
+                        Directory="ProgramMenuDir"
+                        Advertise="yes"
+                        Name="Team Build Tray"
+                        WorkingDirectory="INSTALLDIR"
+                        Icon="Icon.exe">
+ 
+                <Icon Id="Icon.exe" SourceFile="$(var.TeamBuildTray.TargetPath)" />
+              </Shortcut>
+          </File>
+      <RemoveFolder Id="DeleteShortcutFolder"
+                Directory="ProgramMenuDir"
+                On="uninstall" />
       </Component>
       <Component Id="Amber.ico">
         <File Source="$(var.TeamBuildTray.TargetDir)/Amber.ico" />
