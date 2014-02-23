@@ -37,6 +37,8 @@ namespace TeamBuildTray
         private bool showConfiguration;
         StatusMessage lastStatusMessage = new StatusMessage { Message = string.Empty };
 
+		SynchronizationContext uiContext = SynchronizationContext.Current;
+
         public MainBuildList()
         {
 
@@ -118,16 +120,9 @@ namespace TeamBuildTray
 
 		private void QueryTimerElapsed(object sender)
 		{
-			TeamServer teamServer = sender as TeamServer;
-
-			if (teamServer == null)
-			{
-				return;
-			}
-
-			Actions.TfsApi.QueryBuilds(teamServer);
+			Actions.TfsApi.QueryBuilds(server);
 			//Get current build item list
-			foreach (TeamProject teamProject in teamServer.Projects)
+			foreach (TeamProject teamProject in server.Projects)
 			{
 
 				foreach (TeamBuild item in teamProject.Builds)
@@ -139,14 +134,14 @@ namespace TeamBuildTray
 						buildContent.Add(item.BuildDefinitionUri, item);
 
 						//Add to view if not hidden
-						if (!teamServer.HiddenBuilds.Contains(item.BuildDefinitionUri))
+						if (!server.HiddenBuilds.Contains(item.BuildDefinitionUri))
 						{
-							buildContentView.Add(item);
+							uiContext.Send(x => buildContentView.Add(item), null);
 						}
 					}
 					else //Update the item
 					{
-						buildContent[item.BuildDefinitionUri] = item;
+						uiContext.Send(x => buildContent[item.BuildDefinitionUri] = item, null);
 					}
 
 					// Send alerts for changes

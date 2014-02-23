@@ -29,7 +29,7 @@
                             </Grid.ColumnDefinitions>
                                 <Image Source="{Binding Path=Status, Converter={StaticResource BuildStatusConverter}}" Width="16" Height="16"/>
                             <Label Grid.Column="1" Margin="0,-1,0,0" HorizontalAlignment="Stretch">
-	                            <TextBlock Text="{Binding Path=BuildNumber}" TextWrapping="Wrap" Foreground="#FFFFFFFF" />
+	                            <TextBlock Text="{Binding Path=Name}" TextWrapping="Wrap" Foreground="#FFFFFFFF" />
                             </Label>
                             <Label Grid.Column="2" Margin="0,-1,0,0" HorizontalAlignment="Left">
 	                            <TextBlock Text="{Binding Path=RequestedFor}" TextWrapping="Wrap" Foreground="#FFFFFFFF" />
@@ -63,7 +63,7 @@
                             </Grid.ColumnDefinitions>
                                 <Image Source="{Binding Path=Status, Converter={StaticResource BuildStatusConverter}}" Width="16" Height="16"/>
                             <Label Grid.Column="1" Margin="0,-1,0,0" HorizontalAlignment="Stretch">
-	                            <TextBlock Text="{Binding Path=BuildNumber}" TextWrapping="Wrap" Foreground="#FFFFFFFF" />
+	                            <TextBlock Text="{Binding Path=Name}" TextWrapping="Wrap" Foreground="#FFFFFFFF" />
                             </Label>
                             <Label Grid.Column="2" Margin="0,-1,0,0" HorizontalAlignment="Left">
 	                            <TextBlock Text="{Binding Path=RequestedFor}" TextWrapping="Wrap" Foreground="#FFFFFFFF" />

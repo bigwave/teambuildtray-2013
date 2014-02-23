@@ -86,7 +86,20 @@ namespace Actions
 
 					foreach (IBuildDetail aBuild  in buildResult.Builds)
 					{
-						teamProject.Builds.First(m=>m.BuildDefinitionUri == aBuild.BuildDefinitionUri).Status = aBuild.Status;
+						if (!teamProject.Builds.Any(m => m.BuildDefinitionUri == aBuild.BuildDefinitionUri))
+						{
+							List<IBuildDefinition> buildDefinitions = new List<IBuildDefinition>(buildServer.QueryBuildDefinitionsByUri(new Uri[] { aBuild.BuildDefinitionUri }));
+							teamProject.Builds.Add(new TeamBuild()
+							{
+								BuildDefinitionUri = aBuild.BuildDefinitionUri,
+								Name = buildDefinitions[0].Name,
+								Status = aBuild.Status
+							});
+						}
+						else
+						{
+							teamProject.Builds.First(m => m.BuildDefinitionUri == aBuild.BuildDefinitionUri).Status = aBuild.Status;
+						}
 					}
 				}
 			}
