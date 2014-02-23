@@ -51,7 +51,6 @@ namespace TeamBuildTray
             LabelMainTitle.Content = ResourcesMain.MainWindow_Title;
 
             ButtonConfigure.ToolTip = ResourcesMain.MainWindow_ConfigureTooltip;
-            ButtonClose.ToolTip = ResourcesMain.MainWindow_CloseTooltip;
 
             LoadConfiguration(false);
         }
