@@ -50,7 +50,7 @@
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy $(TargetDir)$(TargetFileName) $(SolutionDir)</PostBuildEvent>
+    <PostBuildEvent>xcopy $(TargetDir)$(TargetFileName) $(SolutionDir) /y</PostBuildEvent>
   </PropertyGroup>
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.
