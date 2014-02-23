@@ -72,7 +72,19 @@
       </Component>
       <Component Id="TeamBuildTray.exe.config">
         <File Source="$(var.TeamBuildTray.TargetDir)/TeamBuildTray.exe.config"/>
-      </Component> 
-		</ComponentGroup>
+      </Component>
+      <Component Id="Actions.dll">
+        <File Source="$(var.TeamBuildTray.TargetDir)/Actions.dll"/>
+      </Component>
+      <Component Id="Entities.dll">
+        <File Source="$(var.TeamBuildTray.TargetDir)/Entities.dll"/>
+      </Component>
+      <Component Id="Executors.dll">
+        <File Source="$(var.TeamBuildTray.TargetDir)/Executors.dll"/>
+      </Component>
+      <Component Id="Persistors.dll">
+        <File Source="$(var.TeamBuildTray.TargetDir)/Persistors.dll"/>
+      </Component>
+    </ComponentGroup>
 	</Fragment>
 </Wix>

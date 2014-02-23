@@ -237,6 +237,7 @@
     <ProjectReference Include="..\Actions\Actions.csproj">
       <Project>{be29ed6f-1955-4534-a9e6-79f8a69bba7f}</Project>
       <Name>Actions</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{613c560d-2033-4767-8fa2-bc1b9810e7b6}</Project>
