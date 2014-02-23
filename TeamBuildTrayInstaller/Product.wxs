@@ -47,13 +47,13 @@
                 On="uninstall" />
       </Component>
       <Component Id="Amber.ico">
-        <File Source="$(var.TeamBuildTray.TargetDir)/Amber.ico" />
+        <File Source="$(var.TeamBuildTray.TargetDir)/Resources/Amber.ico" />
       </Component>
       <Component Id="Green.ico">
-        <File Source="$(var.TeamBuildTray.TargetDir)/Green.ico" />
+        <File Source="$(var.TeamBuildTray.TargetDir)/Resources/Green.ico" />
       </Component>
       <Component Id="Grey.ico">
-        <File Source="$(var.TeamBuildTray.TargetDir)/Grey.ico" />
+        <File Source="$(var.TeamBuildTray.TargetDir)/Resources/Grey.ico" />
       </Component>
       <Component Id="Microsoft.TeamFoundation.WorkItemTracking.Client.DataStoreLoader.dll">
         <File Source="$(var.TeamBuildTray.TargetDir)/Microsoft.TeamFoundation.WorkItemTracking.Client.DataStoreLoader.dll" />
@@ -62,7 +62,7 @@
         <File Source="$(var.TeamBuildTray.TargetDir)/Microsoft.WITDataStore.dll" />
       </Component>
       <Component Id="Red.ico">
-        <File Source="$(var.TeamBuildTray.TargetDir)/Red.ico" />
+        <File Source="$(var.TeamBuildTray.TargetDir)/Resources/Red.ico" />
       </Component>
       <Component Id="System.Net.Http.Formatting.dll">
         <File Source="$(var.TeamBuildTray.TargetDir)/System.Net.Http.Formatting.dll" />

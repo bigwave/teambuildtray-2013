@@ -13,6 +13,7 @@ using System;
 using System.Windows;
 using System.Windows.Media.Animation;
 using System.Timers;
+using Entities;
 
 namespace TeamBuildTray
 {

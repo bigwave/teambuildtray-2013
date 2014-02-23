@@ -52,8 +52,9 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
     <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisRuleSet>BasicDesignGuidelineRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -102,24 +103,24 @@
     <Reference Include="PresentationFramework">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
-    <Resource Include="BlueX.png" />
-    <Resource Include="app.ico">
+    <Resource Include="Resources\BlueX.png" />
+    <Resource Include="Resources\app.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Content Include="Green.ico">
+    <Content Include="Resources\Green.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Grey.ico">
+    <Content Include="Resources\Grey.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Red.ico">
+    <Content Include="Resources\Red.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Amber.ico">
+    <Content Include="Resources\Amber.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Properties\DataSources\System.Xml.Linq.XElement.datasource" />
-    <Resource Include="search.png" />
+    <Resource Include="Resources\search.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -128,6 +129,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Source\BuildStatusConverter.cs" />
+    <Compile Include="Source\BuildVisibilityConverter.cs" />
     <Page Include="FirstRunConfiguration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -152,23 +155,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BalloonTipIcon.cs" />
-    <Compile Include="BuildDefinitionExtension.cs" />
-    <Compile Include="BuildQueryEventArgs.cs" />
-    <Compile Include="BuildStatusConverter.cs" />
-    <Compile Include="BuildVisibilityConverter.cs" />
+    <Compile Include="Source\BalloonTipIcon.cs" />
     <Compile Include="FirstRunConfiguration.xaml.cs">
       <DependentUpon>FirstRunConfiguration.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="IconColour.cs" />
+    <Compile Include="Source\GlobalSuppressions.cs" />
     <Compile Include="MainBuildList.xaml.cs">
       <DependentUpon>MainBuildList.xaml</DependentUpon>
     </Compile>
     <Compile Include="MessageWindow.xaml.cs">
       <DependentUpon>MessageWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NotifyIcon.cs" />
+    <Compile Include="Source\NotifyIcon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -187,9 +185,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ResourcesMain.resx</DependentUpon>
     </Compile>
-    <Compile Include="StatusMessage.cs" />
-    <Compile Include="TeamProject.cs" />
-    <Compile Include="TeamServer.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -237,6 +232,16 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Actions\Actions.csproj">
+      <Project>{be29ed6f-1955-4534-a9e6-79f8a69bba7f}</Project>
+      <Name>Actions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entities\Entities.csproj">
+      <Project>{613c560d-2033-4767-8fa2-bc1b9810e7b6}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

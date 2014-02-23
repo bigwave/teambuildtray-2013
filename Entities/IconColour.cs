@@ -1,4 +1,4 @@
-﻿namespace TeamBuildTray
+﻿namespace Entities
 {
     public enum IconColour
     {

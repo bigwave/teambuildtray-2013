@@ -26,13 +26,13 @@
                 switch (buildStatus.Value)
                 {
                     case BuildStatus.Succeeded:
-                        return new Uri("pack://application:,,,/Green.ico", UriKind.RelativeOrAbsolute);
+						return new Uri("pack://application:,,,/Resources/Green.ico", UriKind.RelativeOrAbsolute);
                     case BuildStatus.Failed:
-                        return new Uri("pack://application:,,,/Red.ico", UriKind.RelativeOrAbsolute);
+						return new Uri("pack://application:,,,/Resources/Red.ico", UriKind.RelativeOrAbsolute);
                     case BuildStatus.InProgress:
-                        return new Uri("pack://application:,,,/Amber.ico", UriKind.RelativeOrAbsolute);
+						return new Uri("pack://application:,,,/Resources/Amber.ico", UriKind.RelativeOrAbsolute);
                     default:
-                        return new Uri("pack://application:,,,/Grey.ico", UriKind.RelativeOrAbsolute);
+						return new Uri("pack://application:,,,/Resources/Grey.ico", UriKind.RelativeOrAbsolute);
                 }
             }
 

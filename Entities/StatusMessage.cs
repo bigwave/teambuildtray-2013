@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TeamBuildTray
+namespace Entities
 {
     public class StatusMessage
     {
