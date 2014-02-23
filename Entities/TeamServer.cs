@@ -17,6 +17,8 @@ namespace Entities
 		private bool disposed;
 		private string serverName;
 		private IconColour currentIconColour;
+
+		[XmlIgnore]
 		public List<Uri> HiddenBuilds { get; set; }
 
 		public IconColour GetIconColour()

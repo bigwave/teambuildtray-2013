@@ -14,7 +14,6 @@ namespace Entities
 			public string ProjectName { get; set; }
 
 			public List<TeamBuild> Builds { get; set; }
-			public List<Uri> HiddenBuilds { get; set; }
 
 			public string HiddenFileConfigFileName { get; set; }
 		}

@@ -13,16 +13,16 @@ namespace Persistors
     {
 		public static TeamServer LoadServerFromConfigurationFile(string fileLocation)
 		{
-			TeamServer servers = new TeamServer();
 			if (File.Exists(fileLocation))
 			{
+			TeamServer servers = new TeamServer();
 					XmlSerializer serializer = new XmlSerializer(typeof(TeamServer));
 					FileStream fs = File.OpenRead(fileLocation);
 					TeamServer teamServers = serializer.Deserialize(fs) as TeamServer;
 					fs.Close();
 					return teamServers;
 			}
-			return servers;
+			return null;
 		}
 
 		/// <summary>Gets a list of the hidden builds from the hidden builds XML file.</summary>
