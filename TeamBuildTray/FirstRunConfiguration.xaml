@@ -2,8 +2,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="Add a Team Foundation Server" 
-        Height="345" 
-        Width="323" 
+        Height="384" 
+        Width="383" 
         x:Name="FirstRunConfigurationWindow" 
         WindowStartupLocation="CenterScreen" 
         ResizeMode="NoResize" 
@@ -17,7 +17,7 @@
             MouseDown="Border_MouseDown" 
             BorderBrush="White" 
             BorderThickness="1" 
-            Margin="0,0,0,27">
+            Margin="0,0,0,7">
         <Grid Width="Auto" 
               Margin="1,-1,-1,9">
             <Grid.RowDefinitions>
@@ -79,7 +79,6 @@
                    Grid.Row="5" 
                    Width="57.1"/>
             <RadioButton x:Name="RadioButtonHttp" 
-                         VerticalAlignment="Center" 
                          HorizontalAlignment="Left" 
                          Margin="10,2.04,0,154" 
                          TabIndex="3" 
@@ -87,15 +86,15 @@
                          Grid.Row="5" 
                          IsChecked="True" 
                          Height="25.96" 
-                         Width="47.977" >
-                <Label>http</Label>
+                         Width="47.977" VerticalAlignment="Top" VerticalContentAlignment="Center" >
+                <Label Width="38" Height="26">http</Label>
             </RadioButton>
-            <RadioButton Margin="85.038,2.775,21.598,154" 
+            <RadioButton Margin="85,3,22,153" 
                          x:Name="RadioButtonHttps" 
                          TabIndex="3" 
                          Grid.Column="1" 
                          Grid.Row="5" 
-                         Grid.ColumnSpan="2" >
+                         Grid.ColumnSpan="2" RenderTransformOrigin="0.505,-0.075" VerticalContentAlignment="Center" >
                 <Label VerticalAlignment="Center">https</Label>
             </RadioButton>
             <Button x:Name="ButtonSave" 
@@ -157,9 +156,9 @@
                     HorizontalAlignment="Center" 
                     Click="Button_Click" 
                     VerticalAlignment="Center" 
-                    Margin="63.788,2.775,13.645,157.265" 
-                    Height="21.96" 
-                    Width="90.45" TabIndex="4"/>
+                    Margin="78,3,14,157" 
+                    Height="22" 
+                    Width="104" TabIndex="4"/>
             <TextBox x:Name="TextBoxCollectionName" 
                      Grid.ColumnSpan="2" 
                      Grid.Column="1" 
