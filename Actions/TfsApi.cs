@@ -49,23 +49,6 @@ namespace Actions
 			}
 		}
 
-		/// <summary>Gets the server status.</summary>
-		/// <param name="refreshServerList">if set to <see langword="true" /> [refresh server list].</param>
-		/// <returns>IconColour.</returns>
-		public static IconColour GetServerStatus(bool refreshServerList, TeamServer teamServer)
-		{
-			var colour = IconColour.Grey;
-
-			if (refreshServerList)
-			{
-				// Connect to the server and get a build list
-				colour = GetBuildList(teamServer);
-			}
-
-
-			return colour;
-		}
-
 		public static void QueryBuilds(TeamServer teamServer)
 		{
 			Collection<TeamBuildStatus> buildResults = new Collection<TeamBuildStatus>();
@@ -126,53 +109,6 @@ namespace Actions
 					}
 				}
 			}
-		}
-
-		private static IconColour GetBuildList(TeamServer teamServer)
-		{
-			try
-			{
-				QueryBuilds(teamServer);
-			}
-			catch
-			{
-				return IconColour.Red;
-			}
-
-			bool building = false;
-
-			if (teamServer.Projects.Count == 0)
-			{
-				return IconColour.Grey;
-			}
-
-			foreach (TeamProject teamProject in teamServer.Projects)
-			{
-				if (teamProject.Builds.Count == 0)
-				{
-					return IconColour.Grey;
-				}
-
-				foreach (TeamBuild aBuild in teamProject.Builds)
-				{
-					if (aBuild.Status == TeamBuildStatus.Failed)
-					{
-						return IconColour.Red;
-					}
-
-					if (aBuild.Status == TeamBuildStatus.InProgress)
-					{
-						building = true;
-					}
-				}
-			}
-
-			if (building)
-			{
-				return IconColour.Amber;
-			}
-
-			return IconColour.Green;
 		}
 	
 

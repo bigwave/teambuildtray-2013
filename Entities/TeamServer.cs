@@ -20,6 +20,47 @@ namespace Entities
 		[XmlIgnore]
 		public List<Uri> HiddenBuilds { get; set; }
 
+		/// <summary>Gets the server status.</summary>
+		/// <param name="refreshServerList">if set to <see langword="true" /> [refresh server list].</param>
+		/// <returns>IconColour.</returns>
+		public IconColour GetServerStatus()
+		{
+			bool building = false;
+
+			if (Projects.Count == 0)
+			{
+				return IconColour.Grey;
+			}
+
+			foreach (TeamProject teamProject in Projects)
+			{
+				if (teamProject.Builds.Count == 0)
+				{
+					return IconColour.Grey;
+				}
+
+				foreach (TeamBuild aBuild in teamProject.Builds)
+				{
+					if (aBuild.Status == TeamBuildStatus.Failed)
+					{
+						return IconColour.Red;
+					}
+
+					if (aBuild.Status == TeamBuildStatus.InProgress)
+					{
+						building = true;
+					}
+				}
+			}
+
+			if (building)
+			{
+				return IconColour.Amber;
+			}
+
+			return IconColour.Green;
+		}
+
 		public IconColour GetIconColour()
 		{
 			foreach (TeamProject teamProject in Projects)

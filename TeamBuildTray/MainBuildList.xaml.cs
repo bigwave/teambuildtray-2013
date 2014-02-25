@@ -114,19 +114,17 @@ namespace TeamBuildTray
             }
 
             InitializeServers();
-			currentIconColour = Actions.TfsApi.GetServerStatus(true, server);
-			uiContext.Send(x => SetIcon(currentIconColour), null);
+			QueryTimerElapsed(server);
 		}
 
 		private void QueryTimerElapsed(object sender)
 		{
-			currentIconColour = Actions.TfsApi.GetServerStatus(true, server);
-			uiContext.Send(x => SetIcon(currentIconColour), null);
 			Actions.TfsApi.QueryBuilds(server);
+			currentIconColour = server.GetServerStatus();
+			uiContext.Send(x => SetIcon(currentIconColour), null);
 			//Get current build item list
 			foreach (TeamProject teamProject in server.Projects)
 			{
-
 				foreach (TeamBuild item in teamProject.Builds)
 				{
 					//If the item doesn't exist or needs updating
