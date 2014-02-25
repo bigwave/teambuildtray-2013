@@ -1,5 +1,4 @@
-﻿using Microsoft.TeamFoundation.Build.Client;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,8 +6,25 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-	public class TeamBuildStatus
+	// Summary:
+	//     This enumeration represents the status of builds and build steps.
+	[Flags]
+	public enum TeamBuildStatus
 	{
-		public BuildStatus Status { get; set; }
+		// Summary:
+		//     No status available.
+		None = 0,
+		//
+		// Summary:
+		//     Build is in progress.
+		InProgress = 1,
+		//
+		// Summary:
+		//     Build succeeded.
+		Succeeded = 2,
+		//
+		// Summary:
+		//     Build failed.
+		Failed = 3
 	}
 }

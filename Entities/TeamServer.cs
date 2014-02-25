@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
-using Microsoft.TeamFoundation.Build.Client;
 
 namespace Entities
 {
@@ -31,7 +30,7 @@ namespace Entities
 					if (!HiddenBuilds.Contains(teamBuild.BuildDefinitionUri))
 					{
 						if ((currentIconColour != IconColour.Amber) &&
-							(teamBuild.Status == BuildStatus.Failed))
+							(teamBuild.Status == TeamBuildStatus.Failed))
 						{
 							return IconColour.Red;
 						}

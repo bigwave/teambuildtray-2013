@@ -1,5 +1,4 @@
-﻿using Microsoft.TeamFoundation.Build.Client;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +25,6 @@ namespace Entities
 		public string Name { get; set; }
 		public string RequestedBy { get; set; }
 
-		public BuildStatus Status { get; set; }
+		public TeamBuildStatus Status { get; set; }
 	}
 }

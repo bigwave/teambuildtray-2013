@@ -19,7 +19,6 @@ using System.Reflection;
 namespace TeamBuildTray
 {
 	using Entities;
-	using Microsoft.TeamFoundation.Build.Client;
 
     public partial class MainBuildList
     {
@@ -324,7 +323,7 @@ namespace TeamBuildTray
 		////	}
 		////}
 
-        private void UpdateMainWindowItem(Uri buildDefinitionUri, BuildStatus status, string requestedBy)
+        private void UpdateMainWindowItem(Uri buildDefinitionUri, TeamBuildStatus status, string requestedBy)
         {
             foreach (TeamBuild build in buildContent.Values)
             {

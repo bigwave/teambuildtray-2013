@@ -24,7 +24,7 @@ namespace Actions
 		/// <param name="collectionName">Name of the collection.</param>
 		/// <param name="port">The port.</param>
 		/// <returns>The project info collection.</returns>
-		public static ReadOnlyCollection<ProjectInfo> GetProjectList(string protocol, string serverName, string collectionName, int port)
+		public static ReadOnlyCollection<TeamProject> GetProjectList(string protocol, string serverName, string collectionName, int port)
 		{
 			var tfsCollectionUri = string.Format(CultureInfo.InvariantCulture, "{0}://{1}:{2}/{3}", protocol, serverName, port, collectionName);
 			var tfsCollection = new Uri(tfsCollectionUri, UriKind.Absolute);
@@ -34,7 +34,18 @@ namespace Actions
 				var css = tfsConnection.GetService<ICommonStructureService3>();
 				var tfsProjects = css.ListAllProjects();
 
-				return new ReadOnlyCollection<ProjectInfo>(tfsProjects);
+				Collection<TeamProject> projectsToReturn = new Collection<TeamProject>();
+				foreach (ProjectInfo projectInfo in tfsProjects)
+				{
+					TeamProject aNewProject = new TeamProject()
+					{
+						ProjectName = projectInfo.Name,
+					};
+
+					projectsToReturn.Add(aNewProject);
+				}
+
+				return new ReadOnlyCollection<TeamProject>(projectsToReturn);
 			}
 		}
 
@@ -61,7 +72,7 @@ namespace Actions
 
 			// Do queries
 			var tfsCollectionUri = string.Format(
-				CultureInfo.InvariantCulture, 
+				CultureInfo.InvariantCulture,
 				"{0}://{1}:{2}/{3}",
 				teamServer.Protocol,
 				teamServer.ServerName,
@@ -84,22 +95,34 @@ namespace Actions
 					IBuildQueryResult buildResult = buildServer.QueryBuilds(spec);
 					Debug.WriteLine(teamServer.CollectionName + " " + (DateTime.Now - startTime).TotalSeconds);
 
-					foreach (IBuildDetail aBuild  in buildResult.Builds)
+					foreach (IBuildDetail aBuild in buildResult.Builds)
 					{
 						if (!teamProject.Builds.Any(m => m.BuildDefinitionUri == aBuild.BuildDefinitionUri))
 						{
 							List<IBuildDefinition> buildDefinitions = new List<IBuildDefinition>(buildServer.QueryBuildDefinitionsByUri(new Uri[] { aBuild.BuildDefinitionUri }));
-							teamProject.Builds.Add(new TeamBuild()
+							TeamBuild theNewBuild = new TeamBuild()
 							{
 								BuildDefinitionUri = aBuild.BuildDefinitionUri,
 								Name = buildDefinitions[0].Name,
-								Status = aBuild.Status
-							});
+							};
+
+							teamProject.Builds.Add(theNewBuild);
 						}
-						else
+
+						TeamBuild theBuild = teamProject.Builds.First(m => m.BuildDefinitionUri == aBuild.BuildDefinitionUri);
+						switch (aBuild.Status)
 						{
-							teamProject.Builds.First(m => m.BuildDefinitionUri == aBuild.BuildDefinitionUri).Status = aBuild.Status;
+							case BuildStatus.InProgress:
+								theBuild.Status = TeamBuildStatus.InProgress;
+								break;
+							case BuildStatus.Succeeded:
+								theBuild.Status = TeamBuildStatus.Succeeded;
+								break;
+							default:
+								theBuild.Status = TeamBuildStatus.Failed;
+								break;
 						}
+
 					}
 				}
 			}

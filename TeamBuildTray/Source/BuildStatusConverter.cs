@@ -1,13 +1,13 @@
 ﻿namespace TeamBuildTray
 {
-    using System;
-    using System.Globalization;
-    using System.Windows.Data;
+	using Entities;
+	using System;
+	using System.Globalization;
+	using System.Windows.Data;
 
-    using Microsoft.TeamFoundation.Build.Client;
 
     /// <summary>The build status converter.</summary>
-    [ValueConversion(typeof(BuildStatus), typeof(Uri))]
+    [ValueConversion(typeof(TeamBuildStatus), typeof(Uri))]
     public class BuildStatusConverter : IValueConverter
     {
         #region IValueConverter Members
@@ -20,16 +20,16 @@
         /// <returns>A converted value. If the method returns null, the valid null value is used.</returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var buildStatus = value as BuildStatus?;
+			var buildStatus = value as TeamBuildStatus?;
             if (buildStatus.HasValue)
             {
                 switch (buildStatus.Value)
                 {
-                    case BuildStatus.Succeeded:
+                    case TeamBuildStatus.Succeeded:
 						return new Uri("pack://application:,,,/Resources/Green.ico", UriKind.RelativeOrAbsolute);
-                    case BuildStatus.Failed:
+					case TeamBuildStatus.Failed:
 						return new Uri("pack://application:,,,/Resources/Red.ico", UriKind.RelativeOrAbsolute);
-                    case BuildStatus.InProgress:
+					case TeamBuildStatus.InProgress:
 						return new Uri("pack://application:,,,/Resources/Amber.ico", UriKind.RelativeOrAbsolute);
                     default:
 						return new Uri("pack://application:,,,/Resources/Grey.ico", UriKind.RelativeOrAbsolute);

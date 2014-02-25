@@ -222,13 +222,13 @@ namespace TeamBuildTray
 
 				ListBoxProjects.Items.Clear();
 				Cursor = Cursors.Wait;
-				var projectList = Actions.TfsApi.GetProjectList(protocol, serverName, collectionName, portNumber);
+				ReadOnlyCollection<TeamProject> projectList = Actions.TfsApi.GetProjectList(protocol, serverName, collectionName, portNumber);
 				Cursor = Cursors.Arrow;
 
 				foreach (var project in projectList)
 				{
 					CheckBox checkBox = new CheckBox();
-					checkBox.Content = project.Name;
+					checkBox.Content = project.ProjectName;
 					ListBoxProjects.Items.Add(checkBox);
 				}
 
