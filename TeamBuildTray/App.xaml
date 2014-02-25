@@ -16,10 +16,6 @@
     		<GradientStop Color="#FF043E64" Offset="1"/>
     	</LinearGradientBrush>
             <!-- Put your stuff here instead -->
-
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/PresentationFramework.Aero;component/themes/Aero.NormalColor.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
 
     </Application.Resources>
