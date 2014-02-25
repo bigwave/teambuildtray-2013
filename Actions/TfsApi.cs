@@ -16,7 +16,7 @@ using Microsoft.TeamFoundation.Server;
 
 namespace Actions
 {
-    public class TfsApi
+    public class TfsApi : Actions.ITfsApi
     {
 		/// <summary>Gets the project list.</summary>
 		/// <param name="protocol">The protocol.</param>
@@ -24,7 +24,7 @@ namespace Actions
 		/// <param name="collectionName">Name of the collection.</param>
 		/// <param name="port">The port.</param>
 		/// <returns>The project info collection.</returns>
-		public static ReadOnlyCollection<TeamProject> GetProjectList(string protocol, string serverName, string collectionName, int port)
+		public ReadOnlyCollection<TeamProject> GetProjectList(string protocol, string serverName, string collectionName, int port)
 		{
 			var tfsCollectionUri = string.Format(CultureInfo.InvariantCulture, "{0}://{1}:{2}/{3}", protocol, serverName, port, collectionName);
 			var tfsCollection = new Uri(tfsCollectionUri, UriKind.Absolute);
@@ -49,7 +49,7 @@ namespace Actions
 			}
 		}
 
-		public static void QueryBuilds(TeamServer teamServer)
+		public void QueryBuilds(TeamServer teamServer)
 		{
 			Collection<TeamBuildStatus> buildResults = new Collection<TeamBuildStatus>();
 
@@ -111,7 +111,6 @@ namespace Actions
 			}
 		}
 	
-
 		/// <summary>Queues the build.</summary>
 		/// <param name="agentUri">The agent URI.</param>
 		/// <param name="buildUri">The build URI.</param>

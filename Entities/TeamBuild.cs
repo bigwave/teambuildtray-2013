@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,8 +8,9 @@ using System.Xml.Serialization;
 
 namespace Entities
 {
-	public class TeamBuild
+	public class TeamBuild : INotifyPropertyChanged
 	{
+		private TeamBuildStatus status;
 		[XmlIgnore()]
 		public Uri BuildDefinitionUri { get; set; }
 
@@ -25,6 +27,25 @@ namespace Entities
 		public string Name { get; set; }
 		public string RequestedBy { get; set; }
 
-		public TeamBuildStatus Status { get; set; }
+		public TeamBuildStatus Status
+		{
+			get { return status; }
+			set
+			{
+				if (status != value)
+				{
+					status = value;
+					OnPropertyChanged("Status");
+				}
+			}
+		}
+
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		public void OnPropertyChanged(String propertyName)
+		{
+			if (PropertyChanged != null)
+				PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
 	}
 }

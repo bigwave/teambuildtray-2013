@@ -19,14 +19,17 @@ using System.Reflection;
 namespace TeamBuildTray
 {
 	using Entities;
+	using Actions;
 
     public partial class MainBuildList
     {
 		/// <summary>The interval time in seconds.</summary>
+#if DEBUG
+		public static readonly int IntervalTimeInSeconds = 1;
+#else
 		public static readonly int IntervalTimeInSeconds = 30;
-
+#endif
 		private Timer queryTimer;
-		private static List<Uri> hiddenFields;
 		private readonly Dictionary<Uri, TeamBuild> buildContent = new Dictionary<Uri, TeamBuild>();
         private readonly Queue<StatusMessage> statusMessages = new Queue<StatusMessage>(20);
 		private ObservableCollection<TeamBuild> buildContentView;
@@ -35,6 +38,13 @@ namespace TeamBuildTray
         internal static TeamServer server;
         private bool showConfiguration;
         StatusMessage lastStatusMessage = new StatusMessage { Message = string.Empty };
+		private static Actions.ITfsApi myActions;
+
+		public static Actions.ITfsApi ActionsInstance
+		{
+			get { return myActions; }
+			set { myActions = value; }
+		}
 
 		SynchronizationContext uiContext = SynchronizationContext.Current;
 
@@ -51,6 +61,11 @@ namespace TeamBuildTray
 
             ButtonConfigure.ToolTip = ResourcesMain.MainWindow_ConfigureTooltip;
 
+#if DEBUG
+			myActions = new FakeTfsApi();
+#else
+			myActions = new Actions.TfsApi();
+#endif
             LoadConfiguration(false);
         }
 
@@ -119,7 +134,7 @@ namespace TeamBuildTray
 
 		private void QueryTimerElapsed(object sender)
 		{
-			Actions.TfsApi.QueryBuilds(server);
+			myActions.QueryBuilds(server);
 			currentIconColour = server.GetServerStatus();
 			uiContext.Send(x => SetIcon(currentIconColour), null);
 			//Get current build item list
@@ -481,11 +496,6 @@ namespace TeamBuildTray
             Border border = sender as Border;
 
             if (border != null) border.Background = null;
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
         }
 
         private void BorderMenuForceBuild_Click(object sender, RoutedEventArgs e)

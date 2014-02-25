@@ -222,7 +222,7 @@ namespace TeamBuildTray
 
 				ListBoxProjects.Items.Clear();
 				Cursor = Cursors.Wait;
-				ReadOnlyCollection<TeamProject> projectList = Actions.TfsApi.GetProjectList(protocol, serverName, collectionName, portNumber);
+				ReadOnlyCollection<TeamProject> projectList = MainBuildList.ActionsInstance.GetProjectList(protocol, serverName, collectionName, portNumber);
 				Cursor = Cursors.Arrow;
 
 				foreach (var project in projectList)
