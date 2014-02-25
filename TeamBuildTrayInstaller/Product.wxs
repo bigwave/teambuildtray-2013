@@ -1,53 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="9E74C6AE-FDFB-497A-9E6B-66A690DDC0FC" 
-           Name="TeamBuildTray" 
-           Language="1033" 
-           Version="1.0.0.0" 
+  <Product Id="9E74C6AE-FDFB-497A-9E6B-66A690DDC0FC"
+           Name="TeamBuildTray"
+           Language="1033"
+           Version="!(bind.FileVersion.TeamBuildTrayExecutable)"
            Manufacturer="Bigwave"
            UpgradeCode="9819ff2a-9b01-4adf-a59f-6400ca518dc3">
-		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+    <Package  Description="Team Build Tray, Version: !(bind.FileVersion.TeamBuildTrayExecutable) "
+              InstallerVersion="200"
+              Compressed="yes"
+              InstallScope="perMachine" />
 
-		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-		<MediaTemplate />
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate />
 
-		<Feature Id="ProductFeature" Title="TeamBuildTrayInstaller" Level="1">
-			<ComponentGroupRef Id="ProductComponents" />
-		</Feature>
-	</Product>
+    <Feature Id="ProductFeature" Title="TeamBuildTrayInstaller" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+      <ComponentGroupRef Id="Resources" />
+    </Feature>
+  </Product>
 
-	<Fragment>
-		<Directory Id="TARGETDIR" Name="SourceDir">
-			<Directory Id="ProgramFilesFolder">
-				<Directory Id="INSTALLFOLDER" Name="TeamBuildTrayInstaller" />
-			</Directory>
-  <Directory Id="ProgramMenuFolder" Name="PMenu">
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="TeamBuildTray" >
+          <Directory Id="Resources" Name="Resources" />
+        </Directory>
+      </Directory>
+      <Directory Id="ProgramMenuFolder" Name="PMenu">
         <Directory Id="ProgramMenuDir" Name="TeamBuildTray" />
       </Directory>
-		</Directory>
-	</Fragment>
+    </Directory>
+  </Fragment>
 
-	<Fragment>
-		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
-			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
-			<Component Id="TargetPath">
-        <File Source="$(var.TeamBuildTray.TargetPath)" KeyPath="yes">
-          <Shortcut Id="startmenuAdv"
-                        Directory="ProgramMenuDir"
-                        Advertise="yes"
-                        Name="Team Build Tray"
-                        WorkingDirectory="INSTALLDIR"
-                        Icon="Icon.exe">
- 
-                <Icon Id="Icon.exe" SourceFile="$(var.TeamBuildTray.TargetPath)" />
-              </Shortcut>
-          </File>
-      <RemoveFolder Id="DeleteShortcutFolder"
-                Directory="ProgramMenuDir"
-                On="uninstall" />
-      </Component>
+  <Fragment>
+    <ComponentGroup Id="Resources" Directory="Resources">
       <Component Id="Amber.ico">
-        <File Source="$(var.TeamBuildTray.TargetDir)/Resources/Amber.ico" />
+        <File Source="$(var.TeamBuildTray.TargetDir)/Resources/Amber.ico"  />
       </Component>
       <Component Id="Green.ico">
         <File Source="$(var.TeamBuildTray.TargetDir)/Resources/Green.ico" />
@@ -55,14 +44,37 @@
       <Component Id="Grey.ico">
         <File Source="$(var.TeamBuildTray.TargetDir)/Resources/Grey.ico" />
       </Component>
+      <Component Id="Red.ico">
+        <File Source="$(var.TeamBuildTray.TargetDir)/Resources/Red.ico" />
+      </Component>
+    </ComponentGroup>
+    </Fragment>
+
+  <Fragment>
+
+      <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+        <!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+      <Component Id="TargetPath">
+        <File Source="$(var.TeamBuildTray.TargetPath)" KeyPath="yes" Id="TeamBuildTrayExecutable">
+          <Shortcut Id="startmenuAdv"
+                        Directory="ProgramMenuDir"
+                        Advertise="yes"
+                        Name="Team Build Tray"
+                        WorkingDirectory="INSTALLDIR"
+                        Icon="Icon.exe">
+
+            <Icon Id="Icon.exe" SourceFile="$(var.TeamBuildTray.TargetPath)" />
+          </Shortcut>
+        </File>
+        <RemoveFolder Id="DeleteShortcutFolder"
+                  Directory="ProgramMenuDir"
+                  On="uninstall" />
+      </Component>
       <Component Id="Microsoft.TeamFoundation.WorkItemTracking.Client.DataStoreLoader.dll">
         <File Source="$(var.TeamBuildTray.TargetDir)/Microsoft.TeamFoundation.WorkItemTracking.Client.DataStoreLoader.dll" />
       </Component>
       <Component Id="Microsoft.WITDataStore.dll">
         <File Source="$(var.TeamBuildTray.TargetDir)/Microsoft.WITDataStore.dll" />
-      </Component>
-      <Component Id="Red.ico">
-        <File Source="$(var.TeamBuildTray.TargetDir)/Resources/Red.ico" />
       </Component>
       <Component Id="System.Net.Http.Formatting.dll">
         <File Source="$(var.TeamBuildTray.TargetDir)/System.Net.Http.Formatting.dll" />
@@ -86,5 +98,5 @@
         <File Source="$(var.TeamBuildTray.TargetDir)/Persistors.dll"/>
       </Component>
     </ComponentGroup>
-	</Fragment>
+  </Fragment>
 </Wix>
