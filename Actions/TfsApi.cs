@@ -52,7 +52,7 @@ namespace Actions
 		/// <summary>Gets the server status.</summary>
 		/// <param name="refreshServerList">if set to <see langword="true" /> [refresh server list].</param>
 		/// <returns>IconColour.</returns>
-		public IconColour GetServerStatus(bool refreshServerList, TeamServer teamServer)
+		public static IconColour GetServerStatus(bool refreshServerList, TeamServer teamServer)
 		{
 			var colour = IconColour.Grey;
 
@@ -128,7 +128,7 @@ namespace Actions
 			}
 		}
 
-		private IconColour GetBuildList(TeamServer teamServer)
+		private static IconColour GetBuildList(TeamServer teamServer)
 		{
 			try
 			{
@@ -153,14 +153,14 @@ namespace Actions
 					return IconColour.Grey;
 				}
 
-				foreach (IBuildDetail aBuild in teamProject.Builds)
+				foreach (TeamBuild aBuild in teamProject.Builds)
 				{
-					if (aBuild.Status == BuildStatus.Failed || aBuild.Status == BuildStatus.PartiallySucceeded)
+					if (aBuild.Status == TeamBuildStatus.Failed)
 					{
 						return IconColour.Red;
 					}
 
-					if (aBuild.Status == BuildStatus.InProgress)
+					if (aBuild.Status == TeamBuildStatus.InProgress)
 					{
 						building = true;
 					}
