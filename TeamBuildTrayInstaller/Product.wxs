@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" 
-           Name="TeamBuildTrayInstaller" 
+	<Product Id="9E74C6AE-FDFB-497A-9E6B-66A690DDC0FC" 
+           Name="TeamBuildTray" 
            Language="1033" 
            Version="1.0.0.0" 
            Manufacturer="Bigwave"
