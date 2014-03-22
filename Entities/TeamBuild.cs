@@ -23,8 +23,16 @@ namespace Entities
 			get { return BuildDefinitionUri.ToString(); }
 			set { BuildDefinitionUri = new Uri(value); }
 		}
-	
-		public string Name { get; set; }
+
+		public string ProjectName { get; set; }
+		public string BuildName { get; set; }
+		public string Name
+		{
+			get
+			{
+				return ProjectName + BuildName;
+			}
+		}
 		public string RequestedBy { get; set; }
 
 		public TeamBuildStatus Status

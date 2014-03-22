@@ -86,7 +86,8 @@ namespace Actions
 							TeamBuild theNewBuild = new TeamBuild()
 							{
 								BuildDefinitionUri = aBuild.BuildDefinitionUri,
-								Name = buildDefinitions[0].Name,
+								ProjectName = teamProject.ProjectName,
+								BuildName = buildDefinitions[0].Name,
 							};
 
 							teamProject.Builds.Add(theNewBuild);

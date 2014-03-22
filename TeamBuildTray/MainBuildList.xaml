@@ -70,6 +70,33 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </DataTemplate>
+        <DataTemplate x:Key="BuildContentTemplateIcons">
+            <ListView ItemsSource="{Binding}" 
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      >
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate >
+                        <UniformGrid/>
+                        <!--MinWidth="{Binding ItemWidth,
+                     RelativeSource={RelativeSource Self}}"-->
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Style="{DynamicResource InputControlStyle}" >
+                            <Image Source="{Binding Path=Status, Converter={StaticResource BuildStatusConverter}}" 
+                                       Width="16" 
+                                       Height="16"/>
+                            <TextBlock Text="{Binding Path=ProjectName}" 
+                                       TextWrapping="Wrap"
+                                       FontWeight="Bold"/>
+                            <TextBlock Text="{Binding Path=BuildName}" 
+                                       TextWrapping="Wrap"  />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </DataTemplate>
         <DataTemplate x:Key="BuildContentTemplateConfigure">
             <ItemsControl ItemsSource="{Binding}">
                 <ItemsControl.ItemTemplate>
@@ -210,7 +237,7 @@
             </TeamBuildTray:NotifyIcon>
             <ScrollViewer VerticalScrollBarVisibility="Auto" 
                           Content="{Binding Path=BuildContent, ElementName=window, Mode=Default}" 
-                          ContentTemplate="{DynamicResource BuildContentTemplate}" 
+                          ContentTemplate="{DynamicResource BuildContentTemplateIcons}" 
                           d:UseSampleData="True" 
                           Margin="0,4,2,15" 
                           Grid.RowSpan="2" 

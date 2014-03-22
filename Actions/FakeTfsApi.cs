@@ -29,22 +29,17 @@ namespace Actions
 		public ReadOnlyCollection<TeamProject> GetProjectList(string protocol, string serverName, string collectionName, int port)
 		{
 			Collection<TeamProject> projectsToReturn = new Collection<TeamProject>();
-			TeamProject aNewProject = new TeamProject()
-			{
-				ProjectName = "Fake Project A",
-			};
 
-			projectsToReturn.Add(aNewProject); aNewProject = new TeamProject()
+			for (int i = 0; i < 15; i++)
 			{
-				ProjectName = "Fake Project B",
-			};
+				var aNewProject = new TeamProject()
+				{
+					ProjectName = "Fake Project " + (Char)(65 + i),
+				};
 
-			projectsToReturn.Add(aNewProject); aNewProject = new TeamProject()
-			{
-				ProjectName = "Fake Project C",
-			};
+				projectsToReturn.Add(aNewProject);
 
-			projectsToReturn.Add(aNewProject);
+			}
 
 			return new ReadOnlyCollection<TeamProject>(projectsToReturn);
 		}
@@ -58,29 +53,19 @@ namespace Actions
 				if (teamProject.Builds == null || teamProject.Builds.Count == 0)
 				{
 					teamProject.Builds = new List<TeamBuild>();
-					TeamBuild theNewBuild = new TeamBuild()
-					{
-						BuildDefinitionUri = new Uri("http://tfs/build/1"),
-						Name = teamProject.ProjectName + " build 1",
-						Status = TeamBuildStatus.Succeeded
-					};
-					teamProject.Builds.Add(theNewBuild);
-					theNewBuild = new TeamBuild()
-					{
-						BuildDefinitionUri = new Uri("http://tfs/build/2"),
-						Name = teamProject.ProjectName + " build 2",
-						Status = TeamBuildStatus.Succeeded
-					};
-					teamProject.Builds.Add(theNewBuild);
-					theNewBuild = new TeamBuild()
-					{
-						BuildDefinitionUri = new Uri("http://tfs/build/3"),
-						Name = teamProject.ProjectName + " build 3",
-						Status = TeamBuildStatus.Succeeded
-					};
-					teamProject.Builds.Add(theNewBuild);
-				}
 
+					for (int i = 0; i < 4; i++)
+					{
+						TeamBuild theNewBuild = new TeamBuild()
+						{
+							BuildDefinitionUri = new Uri("http://tfs/build/" + teamProject.ProjectName + "/" + i),
+							ProjectName = teamProject.ProjectName,
+							BuildName =  " build " + i,
+							Status = TeamBuildStatus.Succeeded
+						};
+						teamProject.Builds.Add(theNewBuild);
+					}
+				}
 				else
 				{
 					if (goingUp)
@@ -126,6 +111,7 @@ namespace Actions
 
 		private bool ChangeOneBuildsStatus(TeamProject projects, TeamBuildStatus from, TeamBuildStatus to)
 		{
+			Debug.WriteLine(projects.ProjectName + " : " + from + " to " + to);
 			bool changedOne = false;
 			foreach (TeamBuild aBuild in projects.Builds)
 			{
