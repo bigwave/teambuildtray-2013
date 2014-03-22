@@ -560,7 +560,7 @@ namespace TeamBuildTray
             }
             else
             {
-                ScrollViewerBuildList.ContentTemplate = FindResource("BuildContentTemplate") as DataTemplate;
+                ScrollViewerBuildList.ContentTemplate = FindResource("BuildContentTemplateIcons") as DataTemplate;
 
 				foreach (TeamBuild detail in new List<TeamBuild>(buildContentView))
                 {
